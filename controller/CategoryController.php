@@ -1,24 +1,19 @@
 <?php
 
-class BeerController extends Controller {
+class CategoryController extends Controller {
 
 
 	public function index() {
-		$this->render("index", Beer::findAll());
+		$this->render("index", Category::findAll());
 	}
 
 	public function view() {
 		try {
-			$b = new Beer(parameters()["id"]);
-			$this->render("view", $b);
+			$c = new Category(parameters()["id"]);
+			$this->render("view", $c);
 		} catch (Exception $e) {
 			(new SiteController())->render("index");
 			// $this->render("error");
 		}
 	}
-
-
-
 }
-
-
