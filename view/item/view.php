@@ -18,7 +18,6 @@ Seller : <?php echo $data->seller; ?>
 
 <p>
 <?php
-$id=$_GET["id"];
-echo "<a href='?r=item/delete&id=".$id."'>Delete</a>";
+echo "<a href='?r=item/delete&id=".$data->iditem."'>Delete</a>";
 ?>
 </p>
