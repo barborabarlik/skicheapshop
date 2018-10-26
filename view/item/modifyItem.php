@@ -3,7 +3,7 @@
 <form method="post" action="?r=item/confirm">
 	<?php
 		$_POST["id"]=$_GET["id"];
-		var_dump($data);
+		//var_dump($data);
 	?>
 	<label name="brand">Brand :</label>
 	<input type="text" name="brand" value="<?php echo $data->brand ?>"/>
