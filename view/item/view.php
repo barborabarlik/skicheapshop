@@ -3,17 +3,17 @@
 <h2><?php echo $data->brand; ?> - <?php echo $data->model; ?></h2>
 <p>
 <p>
-  Condition : <?php .$data->state; ?>
+  Condition : <?php $data->state; ?>
 </p>
 <p>
-  <?php .$data->price; ?>€
+  <?php $data->price; ?>€
 </p>
 </p>
 <p>
-Seller : <?php .$data->seller; ?>
+Seller : <?php $data->seller; ?>
 </p>
 <p>
-<?php .$data->description; ?>
+<?php $data->description; ?>
 </p>
 
 <p>

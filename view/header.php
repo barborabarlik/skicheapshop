@@ -13,7 +13,7 @@
 	<nav>
 		<ul>
 			<li><a href="?r=item">All items</a></li>
-			<li><a href="?r=categorie">Categories (TO DO)</a></li>
+			<li><a href="?r=category">Categories</a></li>
 		</ul>
 	</nav>
 	<section>

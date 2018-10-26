@@ -5,8 +5,8 @@
 	<input type="text" name="brand"/>
 	<label name="model">Model :</label>
 	<input type="text" name="model"/>
-	<label name="categorie">Catégorie :</label>
-	<select name="categorie" >
+	<label name="category">Category :</label>
+	<select name="category" >
 	<?php foreach(Category::findAll() as $category){
 		echo "<option value=".$category->idcategory.">".$category->name."</option>";
 	} ?>

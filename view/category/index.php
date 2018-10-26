@@ -3,7 +3,7 @@
 
 <table>
 <?php
-foreach($data as $categoy) {
+foreach($data as $category) {
 	echo "<tr>";
 	echo "<td><a href='?r=category/view&id=".$category->idcategory."'>".$category->name."</a></td>";
 	echo "</tr>";
