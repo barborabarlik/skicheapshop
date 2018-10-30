@@ -56,7 +56,8 @@ class ItemController extends Controller {
 			$this->render("index", Item::findAll());
 		}
 		if($_POST["action"]=="Modify"){
-			$item = new Item();
+			var_dump($_POST);
+			// Manque une ligne ici pour modifier le bon Objet
 			$item->__set("category", new Category($_POST["category"]));
 			$item->__set("brand", $_POST["brand"]);
 			$item->__set("model", $_POST["model"]);
@@ -69,9 +70,8 @@ class ItemController extends Controller {
 																category = '".$_POST["category"]."',
 																state = '".$_POST["state"]."',
 																description = '".$_POST["description"]."',
-																price = '".$_POST["price"]."'
-								where iditem = ".$_GET["id"].")";
-			var_dump($query);
+																price = ".$_POST["price"]."
+								where iditem = ".$_POST["iditem"];
 			db()->exec($query);
 			$this->render("index", Item::findAll());
 		}
