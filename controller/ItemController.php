@@ -75,7 +75,7 @@ class ItemController extends Controller {
 			db()->exec($query);
 			$this->render("index", Item::findAll());
 		}
-		else $this->render("index", Item::finAll());
+		else (new SiteController())->render("index");
 	}
 
 	public function delete(){

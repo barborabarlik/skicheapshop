@@ -9,7 +9,16 @@
 <body>
 	<main>
 	<header>
-		<h1><a href=''>SkiCheapShop</a></h1>
+		<h1><a href='?r=site/index'>SkiCheapShop</a></h1>
+		<?php
+		if(isset($_SESSION["user"])){
+			echo "<a href='?r=people/logout'>Log out</a>";
+			echo $_SESSION["user"];
+		}
+		else{
+			echo "<a href='?r=people/login'>Log in</a>";
+		}
+		?>
 	</header>
 	<nav>
 		<ul>
@@ -17,6 +26,10 @@
 			<li><a href="?r=category">Categories</a></li>
 		</ul>
 	</nav>
+	<div class="message">
+		<?php if(isset($_POST["error"])) { echo "<div class='error'>".$_POST["error"]."</div>"; }?>
+		<?php if(isset($_POST["info"])) { echo "<div class='info'>".$_POST["info"]."</div>"; }?>
+</div>
 	<section>
 </body>
 </html>
