@@ -63,10 +63,12 @@ class PeopleController extends Controller {
 					$_SESSION["user"] = $valueTemp->email;
 					(new SiteController())->render("index");
 				}
-				$_POST["error"]="Wrong password, try again.";
-				else $this->render("login", $_POST);
+				else{
+					$_POST["error"]="Wrong password, try again.";
+					$this->render("login", $_POST);
+				}
 			} else{
-				$_POST["error"]="This account is not existing, try again.";
+				$_POST["error"]="This account does not exist, try again.";
 				$this->render("login", $_POST);
 			}
 		}
