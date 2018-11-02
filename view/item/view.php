@@ -17,6 +17,9 @@
 </p>
 
 <p>
+  <?php
+  echo "<a href='?r=item/modify&id=".$data->iditem."'>Modify</a>";
+  ?>
 <?php
 echo "<a href='?r=item/delete&id=".$data->iditem."'>Delete</a>";
 ?>

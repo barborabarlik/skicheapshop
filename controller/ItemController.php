@@ -71,16 +71,15 @@ class ItemController extends Controller {
 			$item->__set("state", $_POST["state"]);
 			$item->__set("description", $_POST["description"]);
 			$item->__set("price", $_POST["price"]);
-			$this->render("index", Item::findAll());
 			$query = "update item set brand = '".$_POST["brand"]."',
 																model = '".$_POST["model"]."',
 																category = '".$_POST["category"]."',
 																state = '".$_POST["state"]."',
 																description = '".$_POST["description"]."',
 																price = ".$_POST["price"]."
-								where iditem = ".$_POST["iditem"];
+								where iditem = ".$_GET["id"];
 			db()->exec($query);
-			$this->render("index", Item::findAll());
+			$this->view();
 		}
 		else (new SiteController())->render("index");
 	}
