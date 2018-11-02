@@ -37,8 +37,10 @@ class People extends Model {
 		$st = db()->prepare("select iditem from item join people on item.seller = people.idpeople where item.seller = '$id'");
 		$st->execute();
 		$list = array();
+		$isEmpty = true;
 		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
 			$list[] = Item::findByID($row["iditem"]);
+			$isEmpty = false;
 		}
 		return $list;
 	}

@@ -1,3 +1,4 @@
+<?php if(is_object($data)){ ?>
 <h2><?php echo $data->brand; ?> - <?php echo $data->model; ?></h2>
 <p>
   Category : <a href='<?php echo "?r=category/view&id=".$data->category->idcategory ?>'><?php echo $data->category->name; ?></a>
@@ -18,9 +19,11 @@
 
 <p>
   <?php
-  echo "<a href='?r=item/modify&id=".$data->iditem."'>Modify</a>";
+  if(isset($_SESSION["user"]) && $_SESSION["user"] == $data->seller->email){
+    echo "<a href='?r=item/modify&id=".$data->iditem."'>Modify</a>";
+    echo "</br>";
+    echo "<a href='?r=item/delete&id=".$data->iditem."'>Delete</a>";
+  }
   ?>
-<?php
-echo "<a href='?r=item/delete&id=".$data->iditem."'>Delete</a>";
-?>
 </p>
+<?php } ?>

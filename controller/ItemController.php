@@ -12,16 +12,15 @@ class ItemController extends Controller {
 	public function view() {
 		try {
 			$item = Item::findByID($_GET["id"]);
-			// if($list != "no result"){
+			if(is_object($item)){
 				$this->render("view", $item);
-			// }
-			// else {
-			// 	$_POST["error"] = "No item found.";
-			// 	$this->render("view", $_POST);
-			// }
+			}
+			else {
+				$_POST["error"] = "No item found.";
+				$this->render("view", $_POST);
+			}
 		} catch (Exception $e) {
 			(new SiteController())->render("index");
-			// $this->render("error");
 		}
 	}
 

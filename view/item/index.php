@@ -1,5 +1,6 @@
+<?php if(isset($_SESSION["user"])){ ?>
 <a href="?r=item/additem">Add an item</a>
-</br>
+<?php } ?>
 <h2><?php if(isset($data["title"])) { echo $data["title"]; } else { echo "All items";} ?></h2>
 
 <?php
@@ -11,8 +12,8 @@ foreach($data as $item){
 		echo "<td><a href='?r=category/view&id=".$item->category->idcategory."'>".$item->category->name."</a></td>";
 		echo "<td>".$item->state."</td>";
 		echo "<td>€".$item->price."</td>";
-		echo "<td><a href='?r=item/modify&id=".$item->iditem."'>Modify</a></td>";
-		echo "<td><a href='?r=item/delete&id=".$item->iditem."'>Delete</a></td>";
+		//echo "<td><a href='?r=item/modify&id=".$item->iditem."'>Modify</a></td>";
+		//echo "<td><a href='?r=item/delete&id=".$item->iditem."'>Delete</a></td>";
 		echo "</tr>";
 	}
 }

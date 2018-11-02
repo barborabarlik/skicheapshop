@@ -1,3 +1,4 @@
+<?php if(isset($_SESSION["user"])){ ?>
 <h2>Add an item</h2>
 
 <form method="post" action="?r=item/confirm">
@@ -25,3 +26,8 @@
 	€<input type="text" name="price"/>
 	<input type="submit" name ="action" value="Add">
 </form>
+
+<?php
+} else {
+	echo "<p>You must be logged in to add an item.</p>";
+} ?>

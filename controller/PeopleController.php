@@ -10,13 +10,14 @@ class PeopleController extends Controller {
 	public function view() {
 		try{
 			$list = People::findItems($_GET["id"]);
-			if($list != "no result"){
+			var_dump($list);
+			if(!empty($list)){
 				$list["title"] = "Items selling by ".$list[0]->seller->name;
 				(new ItemController())->render("index", $list);
 			}
 			else {
-				$_POST["error"] = "No item is this category.";
-				$this->render("view", $_POST);
+				$_POST["error"] = "Unknow seller";
+				(new SiteController())->render("index", $_POST);
 			}
 		} catch (Exception $e) {
 			(new SiteController())->render("index");
@@ -39,8 +40,8 @@ class PeopleController extends Controller {
 	public function confirm(){
 		if($_POST["action"]=="Sign up"){
 			if($_POST["email1"] == $_POST["email2"] && $_POST["password1"] == $_POST["password2"]){
-				$valueTemp = People::findByEmail(trim($_POST["email1"]));
-				if($valueTemp == "no result"){
+				$user = People::findByEmail(trim($_POST["email1"]));
+				if($user == "no result"){
 					$people = new People();
 					$people->__set("name", $_POST["name"]);
 					$people->__set("email", trim($_POST["email1"]));
@@ -50,6 +51,7 @@ class PeopleController extends Controller {
 																																  	.$_POST["password1"]."')";
 				  db()->exec($query);
 					$_POST["info"] = "Account created with success !";
+					$_SESSION["user"] = $user->email;
 					(new SiteController())->render("index", $_POST);
 				}
 				else{
@@ -63,10 +65,10 @@ class PeopleController extends Controller {
 			}
 		}
 		else if($_POST["action"]=="Login"){
-			$valueTemp = People::findByEmail(trim($_POST["email"]));
-			if($valueTemp != "no result"){
-				if($valueTemp->pass == $_POST["password"]){
-					$_SESSION["user"] = $valueTemp->email;
+			$user = People::findByEmail(trim($_POST["email"]));
+			if($user != "no result"){
+				if($user->pass == $_POST["password"]){
+					$_SESSION["user"] = $user->email;
 					(new SiteController())->render("index");
 				}
 				else{

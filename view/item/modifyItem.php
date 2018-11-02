@@ -1,3 +1,4 @@
+<?php if(isset($_SESSION["user"])){ ?>
 <h2>Modify an item</h2>
 
 <form method="post" action="?r=item/confirm&id=<?php echo $_GET["id"] ?>">
@@ -35,4 +36,7 @@
 	<input type="submit" name ="action" value="Modify">
 </form>
 
-<?php  ?>
+<?php
+} else {
+	echo "<p>You must be logged in to modify an item.</p>";
+} ?>
