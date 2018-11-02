@@ -53,6 +53,7 @@ class Model {
 		$table = strtolower($class);
 		$st = db()->prepare("select id$table from $table where id$table = '$id'");
 		$st->execute();
+		$term = "no result";
 		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
 			$term = new $class($row["id".$table]);
 		}
@@ -90,6 +91,16 @@ class Model {
 				throw new Exception("Unknown variable: ".$fieldName);
 		}
 	}
+
+	public function deleteWithID() {
+		$class = get_class($this);
+		$table = strtolower($class);
+		$idTemp = "id".$table;
+		$id = $this->$idTemp;
+		$query = "delete from $table where id$table=".$id;
+		db()->exec($query);
+	}
+
 	// à surcharger
 	public function __toString() {
 		return get_class($this).": ".$this->name;

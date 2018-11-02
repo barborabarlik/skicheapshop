@@ -1,8 +1,8 @@
 <h2>Modify an item</h2>
 
 <form method="post" action="?r=item/confirm">
-	<label name="iditem">Item ID :</label>
-	<input type="text" name="iditem" value="<?php echo $_GET["id"] ?>" />
+	<label name="iditem">Item ID :</label> <!-- To hide with CSS -->
+	<input type="text" name="iditem" value="<?php echo $_GET["id"] ?>" /> <!-- To hide with CSS -->
 	<label name="brand">Brand :</label>
 	<input type="text" name="brand" value="<?php echo $data->brand ?>"/>
 	<label name="model">Model :</label>

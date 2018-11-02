@@ -4,13 +4,21 @@ class ItemController extends Controller {
 
 
 	public function index() {
-		$this->render("index", Item::findAll());
+		$list = Item::findAll();
+		$list["title"] = "All items";
+		$this->render("index", $list);
 	}
 
 	public function view() {
 		try {
-			$i = new Item(parameters()["id"]);
-			$this->render("view", $i);
+			$item = Item::findByID($_GET["id"]);
+			// if($list != "no result"){
+				$this->render("view", $item);
+			// }
+			// else {
+			// 	$_POST["error"] = "No item found.";
+			// 	$this->render("view", $_POST);
+			// }
 		} catch (Exception $e) {
 			(new SiteController())->render("index");
 			// $this->render("error");
@@ -55,9 +63,8 @@ class ItemController extends Controller {
 			db()->exec($query);
 			$this->render("index", Item::findAll());
 		}
-		if($_POST["action"]=="Modify"){
-			var_dump($_POST);
-			// Manque une ligne ici pour modifier le bon Objet
+		else if($_POST["action"]=="Modify"){
+			$item = new Item();
 			$item->__set("category", new Category($_POST["category"]));
 			$item->__set("brand", $_POST["brand"]);
 			$item->__set("model", $_POST["model"]);
@@ -79,8 +86,8 @@ class ItemController extends Controller {
 	}
 
 	public function delete(){
-		$query = "delete from item where iditem=".$_GET["id"];
-		db()->exec($query);
+		$i = new Item(parameters()["id"]);
+		$i->deleteWithID();
 		$this->render("index", Item::findAll());
 	}
 

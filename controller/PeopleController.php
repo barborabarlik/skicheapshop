@@ -8,12 +8,18 @@ class PeopleController extends Controller {
 	}
 
 	public function view() {
-		try {
-			$p= new People(parameters()["id"]);
-			$this->render("view", $p);
+		try{
+			$list = People::findItems($_GET["id"]);
+			if($list != "no result"){
+				$list["title"] = "Items selling by ".$list[0]->seller->name;
+				(new ItemController())->render("index", $list);
+			}
+			else {
+				$_POST["error"] = "No item is this category.";
+				$this->render("view", $_POST);
+			}
 		} catch (Exception $e) {
 			(new SiteController())->render("index");
-			// $this->render("error");
 		}
 	}
 
@@ -78,10 +84,10 @@ class PeopleController extends Controller {
 		// }
 	}
 
-	public function delete(){
-		$query = "delete from people where idpeople=".$_GET["id"];
-		db()->exec($query);
-		$this->render("index", People::findAll());
-	}
+	// public function delete(){
+	// 	$query = "delete from people where idpeople=".$_GET["id"];
+	// 	db()->exec($query);
+	// 	$this->render("index", People::findAll());
+	// }
 
 }

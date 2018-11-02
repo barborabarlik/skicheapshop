@@ -23,10 +23,28 @@ class Item extends Model {
 			$list[] = new $class($row["id".$table]);
 		}
 		foreach ($list as $i => $details) {
-			$valueTemp = Category::findByID($list[$i]->category);
-			$list[$i]->category = $valueTemp;
+			$valueCategory = Category::findByID($list[$i]->category);
+			$list[$i]->category = $valueCategory;
+			$valuePeople = People::findByID($list[$i]->seller);
+			$list[$i]->seller = $valuePeople;
 		}
 		return $list;
+	}
+
+	public static function findByID($id) {
+		$class = get_called_class();
+		$table = strtolower($class);
+		$st = db()->prepare("select iditem from item where iditem = '$id'");
+		$st->execute();
+		$term = "no result";
+		while($row = $st->fetch(PDO::FETCH_ASSOC)) {
+			$term = new $class($row["id".$table]);
+			$valueCategory = Category::findByID($term->category);
+			$term->category = $valueCategory;
+			$valueSeller = People::findByID($term->seller);
+			$term->seller = $valueSeller;
+		}
+		return $term;
 	}
 
 }
