@@ -15,7 +15,7 @@ class CategoryController extends Controller {
 			}
 			else {
 				$_POST["error"] = "Unknow or empty category";
-				(new SiteController())->render("index");
+				$this->render("index", Category::findAll());
 			}
 	}
 }

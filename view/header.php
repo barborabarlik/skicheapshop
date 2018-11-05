@@ -24,6 +24,12 @@
 		<ul>
 			<li><a href="?r=item">All items</a></li>
 			<li><a href="?r=category">Categories</a></li>
+			<?php if(isset($_SESSION["user"])){ ?>
+			<li><a href="?r=item/additem">Add an item</a></li>
+			<?php } ?>
+			<?php if(isset($_SESSION["user"])){ ?>
+			<li><a href="?r=people/view&id=<?php echo $_SESSION["user"]->idpeople; ?>">My selling items</a></li>
+			<?php } ?>
 		</ul>
 	</nav>
 	<div class="message">

@@ -9,7 +9,6 @@ class PeopleController extends Controller {
 
 	public function view() {
 			$list = People::findItems($_GET["id"]);
-			var_dump($list);
 			if(!empty($list)){
 				$list["title"] = "Items selling by ".$list[0]->seller->name;
 				(new ItemController())->render("index", $list);
