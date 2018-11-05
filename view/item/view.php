@@ -1,5 +1,4 @@
-<?php if(is_object($data)){
-  //var_dump($data); ?>
+<?php if(is_object($data)){?>
 <h2><?php echo $data->brand; ?> - <?php echo $data->model; ?></h2>
 <p>
   Category : <a href='<?php echo "?r=category/view&id=".$data->category->idcategory ?>'><?php echo $data->category->name; ?></a>

@@ -64,6 +64,7 @@ class PeopleController extends Controller {
 			if($user != "no result"){
 				if($user->pass == $_POST["password"]){
 					$_SESSION["user"] = $user;
+					$_POST["info"]="Welcome ".$user->name." !";
 					(new SiteController())->render("index");
 				}
 				else{
