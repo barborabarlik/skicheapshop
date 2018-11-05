@@ -33,7 +33,7 @@
 	<label name="description">Description :</label>
 	<textarea name="description"><?php echo $data->description ?></textarea>
 	<label name="price">Price :</label>
-	€<input type="text" name="price" value="<?php echo $data->price ?>"/>
+	€<input type="number" name="price" value="<?php echo $data->price ?>"/>
 	<input type="submit" name ="action" value="Modify">
 </form>
 

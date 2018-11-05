@@ -23,7 +23,7 @@
 	<label name="description">Description :</label>
 	<textarea name="description"></textarea>
 	<label name="price">Price :</label>
-	€<input type="text" name="price"/>
+	€<input type="number" name="price"/>
 	<input type="submit" name ="action" value="Add">
 </form>
 
