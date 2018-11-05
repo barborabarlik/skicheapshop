@@ -10,28 +10,27 @@ class ItemController extends Controller {
 	}
 
 	public function view() {
-		try {
 			$item = Item::findByID($_GET["id"]);
 			if(is_object($item)){
 				$this->render("view", $item);
 			}
 			else {
-				$_POST["error"] = "No item found.";
-				$this->render("view", $_POST);
+				$_POST["error"] = "Unknow item";
+				$this->render("view");
 			}
-		} catch (Exception $e) {
-			(new SiteController())->render("index");
-		}
 	}
 
 	public function modify() {
-		try {
-			$i = new Item(parameters()["id"]);
-			$this->render("modifyitem", $i);
-		} catch (Exception $e) {
-			(new SiteController())->render("index");
-			// $this->render("error");
-		}
+			// $i = new Item(parameters()["id"]);
+			// $this->render("modifyitem", $i);
+			$item = Item::findByID($_GET["id"]);
+			if(is_object($item)){
+				$this->render("modifyItem", $item);
+			}
+			else {
+				$_POST["error"] = "Unknow item";
+				$this->render("modifyItem");
+			}
 	}
 
 	public function addItem(){
@@ -51,19 +50,21 @@ class ItemController extends Controller {
 			$item->__set("state", $_POST["state"]);
 			$item->__set("description", $_POST["description"]);
 			$item->__set("price", $_POST["price"]);
-			$this->render("index", Item::findAll());
-			$query = "insert into item (brand, model, category, state, description, price) values('".$_POST["brand"]."',
+			$item->__set("seller", $_SESSION["user"]->idpeople);
+			$query = "insert into item (brand, model, category, state, description, price, seller) values('".$_POST["brand"]."',
 																																														'".$_POST["model"]."',
 																																														".$_POST["category"].",
 																																														'".$_POST["state"]."',
 																																														'".$_POST["description"]."',
-																																														".$_POST["price"]."
+																																														".$_POST["price"].",
+																																														".$_SESSION["user"]->idpeople."
 																																														)";
 			db()->exec($query);
+			$_POST["info"] = "Item added with succes !";
 			$this->render("index", Item::findAll());
 		}
 		else if($_POST["action"]=="Modify"){
-			$item = new Item();
+			$item = new Item(); //Doit changer et récupérer l'ID
 			$item->__set("category", new Category($_POST["category"]));
 			$item->__set("brand", $_POST["brand"]);
 			$item->__set("model", $_POST["model"]);
@@ -78,6 +79,7 @@ class ItemController extends Controller {
 																price = ".$_POST["price"]."
 								where iditem = ".$_GET["id"];
 			db()->exec($query);
+			$_POST["info"] = "Item modified with succes !";
 			$this->view();
 		}
 		else (new SiteController())->render("index");
@@ -86,6 +88,7 @@ class ItemController extends Controller {
 	public function delete(){
 		$i = new Item(parameters()["id"]);
 		$i->deleteWithID();
+		$_POST["info"] = "Item deleted with succes !";
 		$this->render("index", Item::findAll());
 	}
 

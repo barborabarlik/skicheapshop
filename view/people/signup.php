@@ -10,5 +10,5 @@
 	<input type="password" name="password1"/>
 	<label name="password2">Confirm password</label>
 	<input type="password" name="password2"/>
-	<input type="submit" name ="action" value="Sign up">
+	<input type="submit" name ="action" value="Register">
 </form>

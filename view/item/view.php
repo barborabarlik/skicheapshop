@@ -1,4 +1,5 @@
-<?php if(is_object($data)){ ?>
+<?php if(is_object($data)){
+  //var_dump($data); ?>
 <h2><?php echo $data->brand; ?> - <?php echo $data->model; ?></h2>
 <p>
   Category : <a href='<?php echo "?r=category/view&id=".$data->category->idcategory ?>'><?php echo $data->category->name; ?></a>
@@ -19,7 +20,7 @@
 
 <p>
   <?php
-  if(isset($_SESSION["user"]) && $_SESSION["user"] == $data->seller->email){
+  if(isset($_SESSION["user"]) && $_SESSION["user"]->idpeople == $data->seller->idpeople){
     echo "<a href='?r=item/modify&id=".$data->iditem."'>Modify</a>";
     echo "</br>";
     echo "<a href='?r=item/delete&id=".$data->iditem."'>Delete</a>";

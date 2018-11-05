@@ -1,4 +1,5 @@
-<?php if(isset($_SESSION["user"])){ ?>
+<?php if(isset($_SESSION["user"]) && $_SESSION["user"]->idpeople == $data->seller->idpeople ){
+	//var_dump($data); ?>
 <h2>Modify an item</h2>
 
 <form method="post" action="?r=item/confirm&id=<?php echo $_GET["id"] ?>">

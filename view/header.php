@@ -13,7 +13,7 @@
 		<?php
 		if(isset($_SESSION["user"])){
 			echo "<a href='?r=people/logout'>Log out</a>";
-			echo $_SESSION["user"];
+			echo $_SESSION["user"]->email;
 		}
 		else{
 			echo "<a href='?r=people/login'>Log in</a>";
